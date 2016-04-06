@@ -1,0 +1,45 @@
+
+.col-md-6
+  .panel.panel-default
+    .panel-heading
+      = link_to edit_interviewee_path(interviewee) do
+        = "#{interviewee.name} #{gender(interviewee.gender)}"
+
+      label.label.label-warning[style="margin-left: 20px"]
+        = t("enums.interviewee.status.#{interviewee.status}")
+
+      .pull-right
+        = fa_icon('calendar')
+        '
+        = interviewee.created_at.to_s(:date_only)
+    table.table
+      tbody
+        tr
+          th 編號
+          td
+            = interviewee.number
+          th 電話
+          td = interviewee.phone
+        tr
+          th email
+          td = interviewee.email
+          th 職缺
+          td = interviewee.position.name
+        tr
+          th Spot
+          td[colspan="3"] = interviewee.spot
+        tr
+          th Skill
+          td[colspan="3"] = interviewee.skill
+        tr
+          th 備註
+          td[colspan="3"] = interviewee.note
+        tr
+          th 面試時間
+          td[colspan="2"]
+            - if interviewee.interview_at.present?
+              = interviewee.interview_at.to_s(:normal)
+          td
+            .pull-right
+              = button_tag '活動記錄', class: 'btn btn-xs btn-success activities',
+                           type: :button, "data-id" => interviewee.id

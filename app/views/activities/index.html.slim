@@ -1,0 +1,14 @@
+- if @activities.present?
+  table.table
+    tbody
+      - @activities.each do |a|
+        tr
+          td = a.created_at.to_s(:normal)
+          td = a.content
+
+- else
+  .alert.alert-danger[role="alert"]
+    span
+      = fa_icon('exclamation')
+    '
+    = t("no_data")

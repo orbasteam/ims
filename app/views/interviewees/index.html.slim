@@ -1,0 +1,53 @@
+
+.pull-left
+  = link_to new_interviewee_path, class: 'btn btn-primary' do
+    = fa_icon('plus')
+
+.visible-sm-block.visible-xs-block
+  .clearfix
+  hr
+
+.pull-right
+  ul.nav.nav-pills
+    - Interviewee.statuses.each do |value, key|
+      li[class="#{current_page?(status: key) ? 'active' : '' }"]
+        = link_to t("enums.interviewee.status.#{value}"), interviewees_path(status: key)
+
+.clearfix
+br
+
+- if @interviewees.present?
+  = render @interviewees
+- else
+  .alert.alert-danger[role="alert"]
+    span
+      = fa_icon('exclamation')
+    '
+    = t("no_data")
+
+= paginate @interviewees
+
+javascript:
+  $(function(){
+    $(".activities").click(function(){
+
+      $.ajax({
+        url: '/interviewees/' + $(this).data('id') + '/activities',
+        method: 'GET'
+      }).done(function(data){
+
+        bootbox.dialog({
+          message: data,
+          title: "活動記錄",
+          buttons: {
+            success: {
+              label: "關閉",
+              className: "btn-default",
+            }
+          }
+        });
+
+      });
+
+    });
+  });
