@@ -3,7 +3,9 @@ class IntervieweesController < ApplicationController
   include Savable
 
   def index
-    @interviewees = Interviewee.includes(:position).page(params[:page])
+    @interviewees = Interviewee.includes(:position)
+                        .order(created_at: :desc)
+                        .page(params[:page])
 
     if params[:status]
       @interviewees.where!(status: params[:status])
