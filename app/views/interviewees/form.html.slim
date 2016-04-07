@@ -1,0 +1,59 @@
+
+h3 面試人員設定
+
+= simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
+
+  - if in_edit?
+    = f.input :status, label: '狀態', collection: Interviewee.statuses,
+              include_blank: false, label_method: -> (s) { t("enums.interviewee.status.#{s.first}") },
+              value_method: :first
+
+  = f.input :number, label: '編號', autofocus: true
+  = f.input :gender, label: '性別', collection: Interviewee.genders,
+            as: :radio_buttons, label_method: -> (s) { gender(s.second) },
+            value_method: :first
+  = f.input :name, label: '姓名'
+  = f.input :name_en, label: '英文姓名'
+  = f.input :email
+  = f.input :phone, label: '電話'
+  = f.association :position, label: '職缺'
+  = f.input :spot
+  = f.input :skill
+  = f.input :interview_at, label: '面試時間', as: :string,
+            input_html: {class: 'datepicker'}
+
+  = f.input :note, label: '備註'
+
+  .col-md-offset-1
+    = form_action interviewees_path
+
+hr
+
+- if in_edit?
+
+  h3 活動記錄
+
+  = simple_form_for Activity.new, url: interviewee_activities_path(params[:id]),
+                    html: { class: 'form-horizontal' } do |f|
+
+    .form-group
+      .col-md-10
+        = f.text_field :content, class: 'form-control', placeholder: '留言記錄', required: true
+
+      .col-md-2
+        = f.submit '送出', class: 'btn btn-primary'
+
+  - if @interviewee.activities.present?
+    table.table
+      tbody
+        - @interviewee.activities.each do |a|
+          tr
+            td[style="width: 160px"] = a.created_at.to_s(:normal)
+            td = a.content
+
+  - else
+    .alert.alert-danger[role="alert"]
+      span
+        = fa_icon('exclamation')
+      '
+      = t("no_data")

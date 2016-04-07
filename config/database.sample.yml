@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: 1234
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: interview_development
+
+test:
+  <<: *default
+  database: interview_test
+
+production:
+  <<: *default
+  database: interview_production
+  username: interview
+  password: <%= ENV['RICE_DATABASE_PASSWORD'] %>

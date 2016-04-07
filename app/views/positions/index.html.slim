@@ -1,0 +1,16 @@
+h3 職缺設定
+
+= link_to new_position_path, class: 'btn btn-primary' do
+  = fa_icon('plus')
+
+hr
+
+table.table.table-bordered
+  thead
+    tr
+      th 名稱
+  tbody
+    - @positions.each do |p|
+      tr
+        td
+          = link_to p.name, edit_position_path(p)

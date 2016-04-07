@@ -1,0 +1,17 @@
+nav.navbar.navbar-default
+  .container-fluid
+    /! Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle.collapsed aria-expanded="false" data-target="#collapse" data-toggle="collapse" type="button"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to root_path, class: 'navbar-brand' do
+        = image_tag('logo.png')
+    #collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          = link_to '面試狀況', interviewees_path
+        li
+          = link_to '職缺設定', positions_path
