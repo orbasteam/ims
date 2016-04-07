@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def gender(sex)
-    sex.to_i == 0 ? '先生' : '小姐'
+    sex.to_i == 0 ? '小姐' : '先生'
   end
 
   def form_action(back_url)

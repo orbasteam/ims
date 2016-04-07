@@ -12,3 +12,7 @@ zh-TW:
         admit:       錄取
         refuse:      拒絕加入
         black:       黑名單
+
+      gender:
+        male: 先生
+        female: 小姐
