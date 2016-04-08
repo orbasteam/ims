@@ -38,4 +38,8 @@ $(function(){
         format: 'yyyy-mm-dd',
         language: 'zh-TW'
     });
+
+    $(".datetime-picker").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm'
+    });
 });
