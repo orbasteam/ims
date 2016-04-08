@@ -10,7 +10,7 @@
 .pull-right
   ul.nav.nav-pills
     - Interviewee.statuses.each do |value, key|
-      li[class="#{current_page?(status: key) ? 'active' : '' }"]
+      li[class="#{(params[:status].to_i == key.to_i) ? 'active' : '' }"]
         = link_to t("enums.interviewee.status.#{value}"), interviewees_path(status: key)
 
 .clearfix
