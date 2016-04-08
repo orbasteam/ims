@@ -3,9 +3,11 @@ class IntervieweesController < ApplicationController
   include Savable
 
   def index
-    @interviewees = Interviewee.includes(:position).page(params[:page])
     params[:status] = params[:status].nil? ? 0 : params[:status]
-    @interviewees.where!(status: params[:status])
+    @interviewees = Interviewee.includes(:position)
+                        .page(params[:page])
+                        .where!(status: params[:status])
+                        .order(created_at: :desc)
   end
 
   private
