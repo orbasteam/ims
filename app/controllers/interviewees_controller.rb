@@ -4,11 +4,8 @@ class IntervieweesController < ApplicationController
 
   def index
     @interviewees = Interviewee.includes(:position).page(params[:page])
-
-    if params[:status]
-      @interviewees.where!(status: params[:status])
-    end
-
+    params[:status] = params[:status].nil? ? 0 : params[:status]
+    @interviewees.where!(status: params[:status])
   end
 
   private
