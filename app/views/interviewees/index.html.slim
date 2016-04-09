@@ -11,7 +11,11 @@
   ul.nav.nav-pills
     - Interviewee.statuses.each do |value, key|
       li[class="#{(params[:status].to_i == key.to_i) ? 'active' : '' }"]
-        = link_to t("enums.interviewee.status.#{value}"), interviewees_path(status: key)
+        = link_to interviewees_path(status: key) do
+          = t("enums.interviewee.status.#{value}")
+          - if @status[key]
+            span.badge = @status[key]
+
 
 .clearfix
 br
