@@ -8,6 +8,8 @@ class IntervieweesController < ApplicationController
                         .page(params[:page])
                         .where!(status: params[:status])
                         .order(created_at: :desc)
+
+    @status = Interviewee.group(:status).count
   end
 
   private
