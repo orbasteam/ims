@@ -15,3 +15,11 @@ nav.navbar.navbar-default
           = link_to '面試狀況', interviewees_path
         li
           = link_to '職缺設定', positions_path
+
+      .col-sm-3.col-md-3
+        = form_tag result_interviewees_path, class: 'navbar-form', role: :search, method: :get do
+          .input-group
+            = text_field_tag :keyword, nil, class: 'form-control', placeholder: 'search'
+            .input-group-btn
+              = button_tag nil, class: 'btn btn-default', type: :submit do
+                = fa_icon('search')

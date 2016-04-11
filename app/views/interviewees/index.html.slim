@@ -4,21 +4,13 @@
     .btn-group
       = link_to new_interviewee_path, class: 'btn btn-primary' do
         = fa_icon('plus')
-  .col-md-2.col-xs-8
-    .btn-group
-      = form_tag result_interviewees_path, method: :get do
-        .input-group
-          = text_field_tag :keyword, params[:keyword], class: 'form-control'
-          .input-group-btn
-            = button_tag nil, class: 'btn btn-default' do
-              = fa_icon('search')
 
   .visible-sm-block.visible-xs-block
     .clearfix
     hr
 
-  .col-md-9
-    ul.nav.nav-pills
+  .col-md-11
+    ul.nav.nav-pills.pull-right
       - Interviewee.statuses.each do |value, key|
         li[class="#{(params[:status].to_i == key.to_i) ? 'active' : '' }"]
           = link_to interviewees_path(status: key) do
