@@ -5,10 +5,6 @@
       = link_to new_interviewee_path, class: 'btn btn-primary' do
         = fa_icon('plus')
 
-  .visible-sm-block.visible-xs-block
-    .clearfix
-    hr
-
   .col-md-11.nav-container
     ul.nav.nav-pills#nav
       - Interviewee.statuses.each do |value, key|
