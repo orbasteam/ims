@@ -10,10 +10,17 @@ class IntervieweesController < ApplicationController
                         .order(created_at: :desc)
 
     @status = Interviewee.group(:status).count
+  end
 
-    if params[:keyword]
-      @interviewees.where!('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
+  def result
+
+    if params[:keyword].blank?
+      redirect_to action: :index
     end
+
+    @interviewees = Interviewee.includes(:position)
+                        .page(params[:page])
+                        .where('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
   end
 
   private

@@ -6,7 +6,7 @@
         = fa_icon('plus')
   .col-md-2.col-xs-8
     .btn-group
-      = form_tag request.original_url, method: :get do
+      = form_tag result_interviewees_path, method: :get do
         .input-group
           = text_field_tag :keyword, params[:keyword], class: 'form-control'
           .input-group-btn
@@ -32,6 +32,8 @@ br
 
 - if @interviewees.present?
   = render @interviewees
+  = paginate @interviewees
+
 - else
   .alert.alert-danger[role="alert"]
     span
@@ -39,29 +41,4 @@ br
     '
     = t("no_data")
 
-= paginate @interviewees
-
-javascript:
-  $(function(){
-    $(".activities").click(function(){
-
-      $.ajax({
-        url: '/interviewees/' + $(this).data('id') + '/activities',
-        method: 'GET'
-      }).done(function(data){
-
-        bootbox.dialog({
-          message: data,
-          title: "活動記錄",
-          buttons: {
-            success: {
-              label: "關閉",
-              className: "btn-default",
-            }
-          }
-        });
-
-      });
-
-    });
-  });
+= render 'script'

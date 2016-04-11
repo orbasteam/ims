@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    .btn-group
+      = link_to interviewees_path, class: 'btn btn-primary' do
+        = fa_icon('caret-left')
+        '
+        | 回主頁
+
+hr
+
+- if @interviewees.present?
+  = render @interviewees
+  = paginate @interviewees
+
+- else
+  .alert.alert-danger[role="alert"]
+    span
+      = fa_icon('exclamation')
+    '
+    = t("no_data")
+
+= render 'script'

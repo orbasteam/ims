@@ -1,0 +1,25 @@
+<script>
+  $(function(){
+    $(".activities").click(function(){
+
+      $.ajax({
+        url: '/interviewees/' + $(this).data('id') + '/activities',
+        method: 'GET'
+      }).done(function(data){
+
+        bootbox.dialog({
+          message: data,
+          title: "活動記錄",
+          buttons: {
+            success: {
+              label: "關閉",
+              className: "btn-default"
+            }
+          }
+        });
+
+      });
+
+    });
+  });
+</script>
