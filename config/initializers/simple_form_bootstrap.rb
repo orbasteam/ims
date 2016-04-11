@@ -75,7 +75,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'col-sm-3 col-md-2 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input
+      ba.use :input, class: 'form-control'
       ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
@@ -152,7 +152,7 @@ SimpleForm.setup do |config|
   config.wrapper_mappings = {
     check_boxes: :horizontal_radio_and_checkboxes,
     radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :vertical_file_input,
+    file: :horizontal_file_input,
     boolean: :vertical_boolean,
     datetime: :horizontal_multi_select,
     date: :horizontal_multi_select,

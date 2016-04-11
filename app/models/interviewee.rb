@@ -1,5 +1,7 @@
 class Interviewee < ActiveRecord::Base
 
+  mount_uploader :resume, ResumeUploader
+
   validates :name, :gender, :number, :position_id, presence: true
 
   enum gender: { female: 0, male: 1 }
