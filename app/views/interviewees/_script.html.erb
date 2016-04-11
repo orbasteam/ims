@@ -23,12 +23,24 @@
     });
 
     if($("#nav").length) {
-      var width = 1;
-      $("#nav").find('li').each(function(){
-        width += $(this).outerWidth(true);
-      });
+      setNavWidth();
+      var navWidth = $(".nav-container").width();
+      var $activeNav = $("#nav").find('li.active');
+      var activeNavOffset = $activeNav.offset().left;
 
-      $("#nav").width(width);
+      if(activeNavOffset > navWidth) {
+        $(".nav-container").animate({
+          scrollLeft: activeNavOffset + $activeNav.outerWidth(true)
+        }, 1000);
+      }
     }
   });
+
+  var setNavWidth = function() {
+    var width = 1;
+    $("#nav").find('li').each(function(){
+      width += $(this).outerWidth(true);
+    });
+    $("#nav").width(width);
+  }
 </script>
