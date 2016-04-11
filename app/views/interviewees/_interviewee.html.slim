@@ -42,5 +42,8 @@
               = interviewee.interview_at.to_s(:normal)
           td
             .pull-right
+              - if interviewee.resume_url
+                = link_to '履歷下載', interviewee.resume_url, class: 'btn btn-xs btn-info', target: '_blank'
+              '
               = button_tag '活動記錄', class: 'btn btn-xs btn-success activities',
                            type: :button, "data-id" => interviewee.id

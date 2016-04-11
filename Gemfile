@@ -33,6 +33,8 @@ gem 'simple_form', '~> 3.1.0'
 
 gem 'kaminari', '~> 0.16.0'
 
+gem 'carrierwave'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

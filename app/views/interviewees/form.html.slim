@@ -8,6 +8,16 @@ h3 面試人員設定
               include_blank: false, label_method: -> (s) { t("enums.interviewee.status.#{s.first}") },
               value_method: :first
 
+  .form-group
+    label.col-sm-3.col-md-2.control-label
+      | 履歷上傳
+    .col-sm-7.col-md-9
+      = f.file_field :resume, class: 'form-control'
+
+    - if f.object.resume_url
+      .col-md-1.col-sm-2
+        = link_to '下載', f.object.resume_url, class: 'btn btn-primary btn-sm', target: '_blank'
+
   = f.input :number, label: '編號', autofocus: true
   = f.input :gender, label: '性別', collection: Interviewee.genders,
             as: :radio_buttons, label_method: -> (s) { gender(s.second) },

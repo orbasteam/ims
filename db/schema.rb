@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401082902) do
+ActiveRecord::Schema.define(version: 20160411091805) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "interviewee_id", limit: 4
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160401082902) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "status",       limit: 4
+    t.string   "resume",       limit: 255
   end
 
   create_table "positions", force: :cascade do |t|
