@@ -9,8 +9,8 @@
     .clearfix
     hr
 
-  .col-md-11
-    ul.nav.nav-pills.pull-right
+  .col-md-11.nav-container
+    ul.nav.nav-pills#nav
       - Interviewee.statuses.each do |value, key|
         li[class="#{(params[:status].to_i == key.to_i) ? 'active' : '' }"]
           = link_to interviewees_path(status: key) do

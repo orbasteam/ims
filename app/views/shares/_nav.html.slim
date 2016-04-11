@@ -16,7 +16,7 @@ nav.navbar.navbar-default
         li
           = link_to '職缺設定', positions_path
 
-      .col-sm-3.col-md-3
+      .col-sm-6.col-md-6
         = form_tag result_interviewees_path, class: 'navbar-form', role: :search, method: :get do
           .input-group
             = text_field_tag :keyword, nil, class: 'form-control', placeholder: 'search'

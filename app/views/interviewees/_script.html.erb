@@ -21,5 +21,14 @@
       });
 
     });
+
+    if($("#nav").length) {
+      var width = 1;
+      $("#nav").find('li').each(function(){
+        width += $(this).outerWidth(true);
+      });
+
+      $("#nav").width(width);
+    }
   });
 </script>
