@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :interviewees, except: [:destroy], concerns: [:paginatable] do
     resources :activities, only: [:index, :create]
+
+    collection do
+      get :result
+    end
+
   end
   resources :positions, except: [:show]
 
