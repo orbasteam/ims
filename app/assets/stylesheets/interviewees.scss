@@ -2,6 +2,12 @@
   overflow-x: auto;
 }
 
+.interviewee-table {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
 @media (min-width: 768px) {
   #nav {
     float: right;
