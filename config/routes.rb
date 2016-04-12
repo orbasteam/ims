@@ -4,17 +4,19 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
-  root 'interviewees#index'
+  root 'dashboard#index'
 
   resources :interviewees, except: [:destroy], concerns: [:paginatable] do
     resources :activities, only: [:index, :create]
 
     collection do
       get :result
+      get :calendar
     end
-
   end
+
   resources :positions, except: [:show]
+  resources :dashboard, only: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

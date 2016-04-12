@@ -23,6 +23,42 @@ class IntervieweesController < ApplicationController
                         .where('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
   end
 
+  def calendar
+    @interviewees = Interviewee.includes(:position)
+                        .where!(status: Interviewee.statuses[:waiting])
+                        .order(created_at: :asc)
+
+    result = []
+    @interviewees.each do |interviewee|
+
+      if interviewee.interview_at.present?
+        time = interviewee.interview_at
+        obj = {
+            event: {
+                id: interviewee.id,
+                name: interviewee.name,
+                startdate: time.to_s(:date_only),
+                enddate: '',
+                starttime: time.strftime("%H:%M"),
+                endtime: (time + 2.hours).strftime("%H:%M"),
+                color: '#e94b35',
+                url: result_interviewees_path(keyword: interviewee.name)
+            }
+        }
+
+        result.push obj
+      end
+
+    end
+
+    respond_to do |format|
+      format.xml {
+        render xml: result
+      }
+    end
+
+  end
+
   private
 
   def strong_params
