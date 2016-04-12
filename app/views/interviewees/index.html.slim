@@ -5,7 +5,7 @@
       = link_to new_interviewee_path, class: 'btn btn-primary btn-sm' do
         = fa_icon('plus')
 
-  .col-md-11.nav-container
+  .col-md-11.col-sm-10.col-xs-10.nav-container
     ul.nav.nav-pills#nav
       - Interviewee.statuses.each do |value, key|
         li[class="#{(params[:status].to_i == key.to_i) ? 'active' : '' }"]
