@@ -13,4 +13,12 @@ module ApplicationHelper
     ['edit', 'update'].include? action_name
   end
 
+  def nav_li(name, path)
+    path_separate = Rails.application.routes.recognize_path(path)
+    klass = path_separate[:controller] == controller_name ? 'active' : nil
+    content_tag :li, class: klass do
+      link_to name, path
+    end
+  end
+
 end

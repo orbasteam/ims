@@ -1,0 +1,10 @@
+#calendar.monthly[style="margin:0 auto"]
+
+javascript:
+  $(function(){
+    $('#calendar').monthly({
+      mode: 'event',
+      xmlUrl: '#{calendar_interviewees_path(format: :xml)}',
+      maxWidth: 768
+    });
+  });

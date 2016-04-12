@@ -11,15 +11,14 @@ nav.navbar.navbar-default
         = image_tag('logo.png')
     #collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
-          = link_to '面試狀況', interviewees_path
-        li
-          = link_to '職缺設定', positions_path
+        = nav_li '行事曆', dashboard_index_path
+        = nav_li '面試狀況', interviewees_path
+        = nav_li '職缺設定', positions_path
 
       .col-sm-6.col-md-6
         = form_tag result_interviewees_path, class: 'navbar-form', role: :search, method: :get do
           .input-group
-            = text_field_tag :keyword, nil, class: 'form-control', placeholder: 'search'
+            = text_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: 'search'
             .input-group-btn
               = button_tag nil, class: 'btn btn-default', type: :submit do
                 = fa_icon('search')
