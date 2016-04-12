@@ -10,6 +10,8 @@
         bootbox.dialog({
           message: data,
           title: "活動記錄",
+          onEscape: function() { },
+          backdrop: true,
           buttons: {
             success: {
               label: "關閉",
