@@ -42,7 +42,7 @@ class IntervieweesController < ApplicationController
                 starttime: time.strftime("%H:%M"),
                 endtime: (time + 2.hours).strftime("%H:%M"),
                 color: '#e94b35',
-                url: result_interviewees_path(keyword: interviewee.name)
+                url: result_interviewees_path(keyword: interviewee.number)
             }
         }
 
