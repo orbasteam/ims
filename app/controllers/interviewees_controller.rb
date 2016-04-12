@@ -36,7 +36,7 @@ class IntervieweesController < ApplicationController
         obj = {
             event: {
                 id: interviewee.id,
-                name: interviewee.name,
+                name: "#{interviewee.name} (#{interviewee.position.name})",
                 startdate: time.to_s(:date_only),
                 enddate: '',
                 starttime: time.strftime("%H:%M"),
