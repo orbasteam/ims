@@ -14,10 +14,15 @@
  *= require_self
  *= require_directory ../../../vendor/assets/stylesheets/.
  *= require font-awesome
+ *= require bootstrap-material-design
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  background-color: #fff !important;
+}
 
 .container {
   margin-bottom: 20px;
