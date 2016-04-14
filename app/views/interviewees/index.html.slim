@@ -20,7 +20,10 @@ br
 
 - if @interviewees.present?
   = render @interviewees
-  = paginate @interviewees
+
+  .row
+    .col-md-12
+      = paginate @interviewees
 
 - else
   .alert.alert-danger[role="alert"]
