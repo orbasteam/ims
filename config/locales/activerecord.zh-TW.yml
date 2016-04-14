@@ -1,0 +1,5 @@
+zh-TW:
+  activerecord:
+    attributes:
+      interviewee:
+        number: 編號
