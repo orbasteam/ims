@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
+  devise_scope :user do
+    authenticated :user do
+      root 'dashboard#index'
+    end
+    unauthenticated :user do
+      root to: 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
-
-  root 'dashboard#index'
 
   resources :interviewees, except: [:destroy], concerns: [:paginatable] do
     resources :activities, only: [:index, :create]
