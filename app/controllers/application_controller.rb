@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def layout_by_resource
-    if request.xhr?
+    if devise_controller?
+      'devise'
+    elsif request.xhr?
       false
     else
       "application"

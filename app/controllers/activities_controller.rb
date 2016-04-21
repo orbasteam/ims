@@ -2,6 +2,8 @@ class ActivitiesController < ApplicationController
 
   include Savable
 
+  before_action :authenticate_user!
+
   def index
     @activities = Activity.where(interviewee_id: params[:interviewee_id])
                           .order(created_at: :desc)

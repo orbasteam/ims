@@ -2,6 +2,8 @@ class IntervieweesController < ApplicationController
 
   include Savable
 
+  before_action :authenticate_user!
+
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
     @interviewees = Interviewee.includes(:position)
