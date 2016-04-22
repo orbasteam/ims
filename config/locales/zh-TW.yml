@@ -253,6 +253,7 @@ zh-TW:
     new_password: '新密碼'
     password_confirmation: '確認密碼'
     login: '登入'
+    logout: '登出'
 
   account: '帳號'
   push_notification: '推播通知'

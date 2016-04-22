@@ -20,3 +20,5 @@ nav.navbar.navbar-default.navbar-static-top
             .input-group-btn
               = button_tag nil, class: 'btn btn-default', type: :submit do
                 = fa_icon('search')
+
+        = link_to t('page.logout'), destroy_user_session_path, class: 'btn btn-primary btn-sm', method: :delete
