@@ -1,0 +1,16 @@
+.col-md-12
+  #logbox
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      h1
+        = t 'page.sign_up'
+
+      = devise_error_messages!
+
+      = f.email_field :email, class: 'input pass form-control', placeholder: 'Email'
+      = f.password_field :password, class: 'input pass form-control', placeholder: 'Password'
+      = f.password_field :password_confirmation, class: 'input pass form-control', placeholder: 'Password Confirmation'
+
+      = f.submit t('submit'), class: 'input pass inputButton'
+
+    = render 'devise/shared/links'
+    
