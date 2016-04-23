@@ -8,17 +8,17 @@ nav.navbar.navbar-default.navbar-static-top
         span.icon-bar
         span.icon-bar
       = link_to 'Interview System', root_path, class: 'navbar-brand'
-      #collapse.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          = nav_li '行事曆', dashboard_index_path
-          = nav_li '面試狀況', interviewees_path
-          = nav_li '職缺設定', positions_path
+    #collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        = nav_li '行事曆', dashboard_index_path
+        = nav_li '面試狀況', interviewees_path
+        = nav_li '職缺設定', positions_path
 
-        = form_tag result_interviewees_path, class: 'navbar-form navbar-right', role: :search, method: :get do
-          .input-group
-            = text_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: 'search'
-            .input-group-btn
-              = button_tag nil, class: 'btn btn-default', type: :submit do
-                = fa_icon('search')
+      = form_tag result_interviewees_path, class: 'navbar-form navbar-right', role: :search, method: :get do
+        .input-group
+          = text_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: 'search'
+          .input-group-btn
+            = button_tag nil, class: 'btn btn-default', type: :submit do
+              = fa_icon('search')
 
-        = link_to t('page.logout'), destroy_user_session_path, class: 'btn btn-primary btn-sm', method: :delete
+            = link_to t('page.logout'), destroy_user_session_path, class: 'btn btn-default', method: :delete
