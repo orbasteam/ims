@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { passwords: :passwords }
 
   devise_scope :user do
     authenticated :user do

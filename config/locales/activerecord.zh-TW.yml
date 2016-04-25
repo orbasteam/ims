@@ -3,3 +3,5 @@ zh-TW:
     attributes:
       interviewee:
         number: 編號
+      user:
+        email: 電子郵件
