@@ -20,6 +20,8 @@ gem 'kaminari', '~> 0.16.0'
 gem 'carrierwave'
 gem 'devise'
 gem 'devise-i18n'
+gem 'cancancan'
+gem 'config'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

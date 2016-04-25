@@ -1,0 +1,12 @@
+.col-md-12
+	#logbox
+		= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: 'form-horizontal', method: :post }) do |f|
+			h1 
+				= t 'page.forget_password'
+				= f.email_field :email, class: 'input pass form-control', placeholder: :Email
+
+			# = devise_error_messages!
+			= f.submit t('page.send_reset_password_instructions'), class: 'inputButton'
+
+
+		= render 'devise/shared/links'
