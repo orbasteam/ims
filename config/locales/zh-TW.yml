@@ -249,6 +249,7 @@ zh-TW:
     password: '密碼'
     remember_me: '記住我'
     forget_password: '忘記密碼'
+    send_reset_password_instructions: '寄送重設密碼信件'
     change_password: '修改密碼'
     new_password: '新密碼'
     password_confirmation: '確認密碼'
