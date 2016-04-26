@@ -30,3 +30,5 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 config/settings/development.yml
 config/settings/production.yml
+
+client_secret.json
