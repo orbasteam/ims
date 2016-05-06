@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { passwords: :passwords }
 
   devise_scope :user do
+
+    get '/users/slack_callback' => 'sessions#slack_callback'
+
     authenticated :user do
       root 'dashboard#index'
     end

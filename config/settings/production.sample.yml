@@ -2,3 +2,10 @@ smtp:
   hostname: smtp.example.com
   username: postmaster@example.com
   password: 12345678
+  from: 'noreply@example.com'
+
+domain: 'localhost'
+
+slack:
+  app_id: 'xxxxxxx'
+  app_secret: 'xxxxxxx'

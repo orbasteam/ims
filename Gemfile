@@ -23,6 +23,8 @@ gem 'devise-i18n'
 gem 'cancancan'
 gem 'config'
 
+gem 'omniauth-slack'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

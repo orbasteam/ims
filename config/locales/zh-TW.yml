@@ -255,7 +255,8 @@ zh-TW:
     password_confirmation: '確認密碼'
     login: '登入'
     logout: '登出'
-    sign_up: 註冊
+    sign_up: '註冊'
+    sign_in_with: '以其他方式登入'
 
   account: '帳號'
   push_notification: '推播通知'
