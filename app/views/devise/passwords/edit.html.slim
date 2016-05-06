@@ -1,0 +1,19 @@
+.col-md-12
+  #logbox
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: 'form-horizontal', method: :put }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      h1
+        = t('.change_your_password', :default => 'Change your password')
+
+      = f.password_field :password,
+              class: 'input pass form-control', autofocus: true, required: true,
+              placeholder: t('.new_password', :default => 'New password')
+
+      = f.password_field :password_confirmation,
+              class: 'input pass form-control', required: true,
+              placeholder: t('.confirm_new_password', :default => 'Confirm new password')
+
+      = f.submit t('.change_my_password', :default => 'Change my password'), class: 'inputButton'
+
+      = render "devise/shared/links"
