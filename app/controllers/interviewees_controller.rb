@@ -67,8 +67,7 @@ class IntervieweesController < ApplicationController
     params.require(:interviewee)
           .permit(:name, :name_en, :gender, :number, :status,
                   :email, :phone, :position_id, :spot,
-                  :skill, :interview_at, :note, :result, :resume)
-          .merge(interviewer_id: current_user.id)
+                  :skill, :interview_at, :note, :result, :resume, :interviewer_id)
   end
 
 end
