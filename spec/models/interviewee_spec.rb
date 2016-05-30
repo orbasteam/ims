@@ -19,6 +19,7 @@ RSpec.describe Interviewee, type: :model do
 		it { should have_db_column(:updated_at).of_type(:datetime)}
 		it { should have_db_column(:status).of_type(:integer)}
 		it { should have_db_column(:resume).of_type(:string)}
+		it { should have_db_column(:interviewer_id).of_type(:string)}
 	end
 
 	context "checking validations" do

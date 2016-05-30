@@ -8,6 +8,7 @@ class Interviewee < ActiveRecord::Base
   enum status: [:pending, :no_response, :waiting, :refuse_interview, :candidate, :failed, :admit, :refuse, :black]
 
   belongs_to :position
+  belongs_to :interviewer, foreign_key: :interviewer_id, class_name: 'User'
   has_many :activities, -> { order(created_at: :desc) }
 
   before_create -> {

@@ -6,7 +6,7 @@ class IntervieweesController < ApplicationController
 
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
-    @interviewees = Interviewee.includes(:position)
+    @interviewees = Interviewee.includes(:position, :interviewer)
                         .page(params[:page])
                         .where!(status: params[:status])
                         .order(created_at: :desc)
@@ -68,6 +68,7 @@ class IntervieweesController < ApplicationController
           .permit(:name, :name_en, :gender, :number, :status,
                   :email, :phone, :position_id, :spot,
                   :skill, :interview_at, :note, :result, :resume)
+          .merge(interviewer_id: current_user.id)
   end
 
 end

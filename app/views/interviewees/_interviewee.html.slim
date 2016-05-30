@@ -34,7 +34,9 @@
           td[colspan="3"] = interviewee.skill
         tr
           th 備註
-          td[colspan="3"] = interviewee.note
+          td = interviewee.note
+          th 面試人員
+          td = interviewee.interviewer.try(:name)
         tr
           th 面試時間
           td
