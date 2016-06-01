@@ -12,6 +12,10 @@ class IntervieweesController < ApplicationController
                         .order(created_at: :desc)
 
     @status = Interviewee.group(:status).count
+    @activity_count = Activity
+                        .group(:interviewee_id)
+                        .where(interviewee_id: @interviewees.collect(&:id))
+                        .count
   end
 
   def result
