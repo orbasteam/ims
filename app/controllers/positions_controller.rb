@@ -2,8 +2,6 @@ class PositionsController < ApplicationController
 
   include Savable
 
-  before_action :authenticate_user!
-
   def index
     @positions = Position.all
   end
