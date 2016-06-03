@@ -3,7 +3,8 @@ h3 面試人員設定
 
 = simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
 
-  = f.hidden_field :interviewer_id, value: current_user.id
+  - unless in_edit?
+    = f.hidden_field :interviewer_id, value: current_user.id
 
   - if in_edit?
     = f.input :status, label: '狀態', collection: Interviewee.statuses,
