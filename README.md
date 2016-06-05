@@ -24,7 +24,11 @@ This is __Interview Management System__, please follow the instruction below to 
 
 5. db migration
 
-	`rake db:create db:migrate db:seed`
+	`rake db:create`
+
+	`rake db:schema:load`
+
+	`rake db:seed`
 
 6. start server
 
