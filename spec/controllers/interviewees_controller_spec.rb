@@ -19,6 +19,18 @@ RSpec.describe IntervieweesController, type: :controller do
       expect(response).to be_success
     end
 
+    it "assigns @interviewees" do
+      sign_in user
+
+      create(:interviewee)
+      interviewee = create(:interviewee)
+      interviewee.status = :no_response
+      interviewee.save
+
+      get :index
+      expect(assigns(:interviewees).count).to eq 1
+    end
+
   end
 
   describe "GET #new" do
