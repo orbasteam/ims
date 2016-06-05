@@ -1,0 +1,8 @@
+smtp:
+  hostname: smtp.example.com
+  username: postmaster@example.com
+  password: 12345678
+
+slack:
+  app_id:
+  app_secret:
