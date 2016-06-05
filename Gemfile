@@ -28,7 +28,6 @@ gem 'omniauth-slack'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  gem 'byebug'
   gem 'capistrano-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
