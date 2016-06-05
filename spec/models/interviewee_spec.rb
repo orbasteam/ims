@@ -19,7 +19,7 @@ RSpec.describe Interviewee, type: :model do
 		it { should have_db_column(:updated_at).of_type(:datetime)}
 		it { should have_db_column(:status).of_type(:integer)}
 		it { should have_db_column(:resume).of_type(:string)}
-		it { should have_db_column(:interviewer_id).of_type(:string)}
+		it { should have_db_column(:interviewer_id).of_type(:integer)}
 	end
 
 	context "checking validations" do
@@ -31,23 +31,30 @@ RSpec.describe Interviewee, type: :model do
 
   context "checking association" do
     it { should belong_to(:position) }
+    it { should belong_to(:interviewer) }
     it { should have_many(:activities) }
   end
 
   context "checking callback" do
-  	let(:interviewee){FactoryGirl.create(:interviewee)}
+
+  	let(:interviewee){ create(:interviewee) }
+
   	context "before create" do
+
   		it "is status pending" do
   			expect(interviewee.status).to eq 'pending'
-  		end
+      end
+
   	end
 
   	context "after update" do
+
   		it "is status log update" do
   			interviewee.status = 'refuse_interview'
   			interviewee.save
   			expect(interviewee.activities.last.content).to eq "[系統] 狀態修改為#{I18n.t("enums.interviewee.status.#{interviewee.status}")}"
-  		end
+      end
+
   	end
   end
 end

@@ -1,112 +1,178 @@
 require 'rails_helper'
 
 RSpec.describe IntervieweesController, type: :controller do
-	describe 'GET #index' do
-		render_views
-		it 'response success' do
-			get :index
-			expect(response).to be_success
-		end
-	end
 
-	describe 'GET #new' do
-		render_views
-		it 'response success' do
-			get :new
-			expect(response).to be_success
-		end
+  let(:user) { create(:user) }
+  let(:interviewee) { create(:interviewee) }
 
-		it 'assigns interviewee' do
-			get :new
-			expect(assigns(:interviewee)).to be_a Interviewee
-		end
-	end
+  describe "GET #index" do
 
-	let(:valid_params) {{
-		name: 'Dennis',
-		gender: 'male',
-		number: '12345',
-		position_id: 1
-	}}
+    render_views
 
-	let(:invalid_params) {{
-		name: '',
-		gender: '',
-		number: ''
-	}}
+    it_should_behave_like "checking auth" do
+      subject { get :index }
+    end
 
-	describe 'POST #create' do
-		render_views
-		context 'create success' do
-			before(:each) do
-				post :create, interviewee: valid_params
-			end
+    it "response success" do
+      sign_in user
+      get :index
+      expect(response).to be_success
+    end
 
-			it 'response redirect when success' do
-				expect(response).to redirect_to edit_interviewee_path(assigns(:interviewee).to_param)
-			end
+  end
 
-			it 'create data' do
-				interviewee = Interviewee.last
-				expect(assigns(:interviewee)).to eq interviewee
-				expect(assigns(:interviewee)).to be_persisted
-			end
-		end
+  describe "GET #new" do
 
-		it 'render form when failed' do
-			post :create, interviewee: invalid_params
-			expect(response).to render_template :form
-		end
-	end
+    render_views
 
-	let(:interviewee){ FactoryGirl.create :interviewee }
+    it_should_behave_like "checking auth" do
+      subject { get :new }
+    end
 
-	describe 'GET #edit' do
-		render_views
-		before(:each) do
-			get :edit, id: interviewee.to_param
-		end
-		it 'response success' do
-			expect(response).to be_success
-		end
+    it "response success" do
+      sign_in user
+      get :new
+      expect(response).to be_success
+    end
 
-		it 'assigns :interviewee' do
-			expect(assigns(:interviewee)).to eq interviewee
-		end
-	end
+    it "assigns @interviewee" do
+      sign_in user
+      get :new
+      expect(assigns(:interviewee)).to be_a Interviewee
+    end
+  end
 
-	describe 'PUT #update' do
-		render_views
-		context 'update success' do
-			before(:each) do
-				put :update, id: interviewee.to_param, interviewee: valid_params
-			end
+  let(:valid_params) {
+    {
+      name: 'Dennis',
+      gender: 'male',
+      number: '12345',
+      position_id: 1
+    }
+  }
 
-			it 'redirect success' do
-				expect(response).to redirect_to edit_interviewee_path interviewee.to_param
-			end
+  let(:invalid_params) {
+    {
+      name: '',
+      gender: '',
+      number: ''
+    }
+  }
 
-			it 'update success' do
-				expect(assigns(:interviewee).name).to eq valid_params[:name]
-				expect(assigns(:interviewee).number).to eq valid_params[:number]
-				expect(assigns(:interviewee).gender).to eq valid_params[:gender]
-			end
-		end
-	end
+  describe "POST #create" do
 
-	describe 'GET #calendar' do
-		render_views
-		it 'response success' do
-			get :calendar, format: :xml
-			expect(response).to be_success
-		end
-	end
+    render_views
 
-	describe 'GET #result' do
-		render_views
-		let 'response success' do
-			get :result
-			expect(response).to be_success
-		end
-	end
+    it_should_behave_like "checking auth" do
+      subject { post :create }
+    end
+
+    context "create success" do
+
+      before(:each) do
+        sign_in user
+        post :create, interviewee: valid_params
+      end
+
+      it "response redirect when success" do
+        expect(response).to redirect_to edit_interviewee_path(assigns(:interviewee).to_param)
+      end
+
+      it "create data" do
+        interviewee = Interviewee.last
+        expect(assigns(:interviewee)).to eq interviewee
+        expect(assigns(:interviewee)).to be_persisted
+      end
+    end
+
+    it "render form when failed" do
+      sign_in user
+      post :create, interviewee: invalid_params
+      expect(response).to render_template :form
+    end
+
+  end
+
+  describe "GET #edit" do
+
+    render_views
+
+    it_should_behave_like "checking auth" do
+      subject { get :edit, id: interviewee.to_param }
+    end
+
+    it "response success" do
+      sign_in user
+      get :edit, id: interviewee.to_param
+      expect(response).to be_success
+    end
+
+    it "assigns :interviewee" do
+      sign_in user
+      get :edit, id: interviewee.to_param
+      expect(assigns(:interviewee)).to eq interviewee
+    end
+  end
+
+  describe "PUT #update" do
+
+    render_views
+
+    it_should_behave_like "checking auth" do
+      subject { put :update, id: interviewee.to_param, interviewee: valid_params }
+    end
+
+    context "update success" do
+
+      before(:each) {
+        sign_in user
+        put :update, id: interviewee.to_param, interviewee: valid_params
+      }
+
+      it "redirect success" do
+        expect(response).to redirect_to edit_interviewee_path interviewee.to_param
+      end
+
+      it "update success" do
+        expect(assigns(:interviewee).name).to eq valid_params[:name]
+        expect(assigns(:interviewee).number).to eq valid_params[:number]
+        expect(assigns(:interviewee).gender).to eq valid_params[:gender]
+      end
+
+    end
+
+  end
+
+  describe "GET #calendar" do
+
+    render_views
+
+    it_should_behave_like "checking auth" do
+      subject { get :calendar }
+    end
+
+    it "response success" do
+      sign_in user
+      get :calendar, format: :xml
+      expect(response).to be_success
+    end
+
+  end
+
+  describe "GET #result" do
+
+    render_views
+
+    it_should_behave_like "checking auth" do
+      subject { get :result }
+    end
+
+    let "response success" do
+      sign_in user
+      get :result
+      expect(response).to be_success
+    end
+
+  end
+
 end
