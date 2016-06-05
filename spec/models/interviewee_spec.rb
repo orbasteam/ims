@@ -4,14 +4,11 @@ RSpec.describe Interviewee, type: :model do
 
 	context "checking columns" do
 		it { should have_db_column(:name).of_type(:string)}
-		it { should have_db_column(:name_en).of_type(:string)}
 		it { should have_db_column(:gender).of_type(:integer)}
 		it { should have_db_column(:number).of_type(:string)}
 		it { should have_db_column(:email).of_type(:string)}
 		it { should have_db_column(:phone).of_type(:string)}
 		it { should have_db_column(:position_id).of_type(:integer)}
-		it { should have_db_column(:spot).of_type(:text)}
-		it { should have_db_column(:skill).of_type(:string)}
 		it { should have_db_column(:interview_at).of_type(:datetime)}
 		it { should have_db_column(:note).of_type(:string)}
 		it { should have_db_column(:result).of_type(:string)}

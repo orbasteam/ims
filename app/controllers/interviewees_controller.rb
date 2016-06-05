@@ -70,9 +70,9 @@ class IntervieweesController < ApplicationController
 
   def strong_params
     params.require(:interviewee)
-          .permit(:name, :name_en, :gender, :number, :status,
-                  :email, :phone, :position_id, :spot,
-                  :skill, :interview_at, :note, :result, :resume, :interviewer_id)
+          .permit(:name, :gender, :number, :status,
+                  :email, :phone, :position_id, :interview_at,
+                  :note, :result, :resume, :interviewer_id)
   end
 
 end
