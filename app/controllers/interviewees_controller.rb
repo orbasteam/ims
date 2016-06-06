@@ -3,36 +3,26 @@ class IntervieweesController < ApplicationController
   include Savable
 
   before_action :authenticate_user!
+  before_action :set_interviewees, only: [:index, :result, :calendar]
+  before_action :set_interviewee_status, only: [:index, :result]
 
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
-    @interviewees = Interviewee.includes(:position, :interviewer)
-                        .page(params[:page])
-                        .where!(status: params[:status])
-                        .order(created_at: :desc)
-
-    @status = Interviewee.group(:status).count
-    @activity_count = Activity
-                        .group(:interviewee_id)
-                        .where(interviewee_id: @interviewees.collect(&:id))
-                        .count
+    @interviewees = @interviewees.where(status: params[:status])
   end
 
+  # search result
   def result
 
     if params[:keyword].blank?
       redirect_to action: :index
     end
 
-    @interviewees = Interviewee.includes(:position)
-                        .page(params[:page])
-                        .where('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
+    @interviewees = @interviewees.where('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
   end
 
   def calendar
-    @interviewees = Interviewee.includes(:position)
-                        .where!(status: Interviewee.statuses[:waiting])
-                        .order(created_at: :asc)
+    @interviewees = @interviewees.where(status: Interviewee.statuses[:waiting])
 
     result = []
     @interviewees.each do |interviewee|
@@ -67,11 +57,23 @@ class IntervieweesController < ApplicationController
 
   private
 
+  def set_interviewees
+    @interviewees = Interviewee
+                      .includes(:position, :interviewer)
+                      .page(params[:page])
+                      .order(created_at: :desc)
+  end
+
+  def set_interviewee_status
+    @status = Interviewee.group(:status).count
+    @activity_count = Activity.group_count(@interviewees)
+  end
+
   def strong_params
     params.require(:interviewee)
-          .permit(:name, :name_en, :gender, :number, :status,
-                  :email, :phone, :position_id, :spot,
-                  :skill, :interview_at, :note, :result, :resume, :interviewer_id)
+          .permit(:name, :gender, :number, :status,
+                  :email, :phone, :position_id, :interview_at,
+                  :contact_method, :note, :result, :resume, :interviewer_id)
   end
 
 end

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.6'
 gem 'mysql2', '0.3.17'
 gem 'sass-rails', '~> 5.0'
@@ -29,16 +28,15 @@ gem 'omniauth-slack'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  gem 'byebug'
   gem 'capistrano-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'pry'
   gem "quiet_assets", "~> 1.0.0"
   gem 'guard-rspec', require: false
   gem "better_errors"
