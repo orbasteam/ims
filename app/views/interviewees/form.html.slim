@@ -26,12 +26,12 @@ h3 面試人員設定
             as: :radio_buttons, label_method: -> (s) { gender(s.second) },
             value_method: :first
   = f.input :name, label: '姓名'
-  = f.input :name_en, label: '英文姓名'
   = f.input :email
   = f.input :phone, label: '電話'
   = f.association :position, label: '職缺'
-  = f.input :spot
-  = f.input :skill
+
+  = f.input :contact_method, label: '聯絡方式'
+
   = f.input :interview_at, label: '面試時間', as: :string,
             input_html: {class: 'datetime-picker'}
 

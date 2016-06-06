@@ -9,4 +9,9 @@ RSpec.describe Activity, type: :model do
   context "checking association" do
     it { should belong_to(:interviewee) }
   end
+
+  context "checking validations" do
+    it { should validate_presence_of(:content) }
+  end
+
 end

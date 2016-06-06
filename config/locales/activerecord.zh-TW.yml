@@ -2,6 +2,20 @@ zh-TW:
   activerecord:
     attributes:
       interviewee:
-        number: 編號
+        number: '編號'
+        name: '姓名'
+        gender: '性別'
+        phone: '電話'
+        position_id: '職缺'
+        interview_at: '面試時間'
+        note: '備註'
+        status: '狀態'
+        resume: '履歷'
+        interviewer_id: '面試官'
+        contact_method: '聯絡方式'
       user:
-        email: 電子郵件
+        email: '電子郵件'
+        name: '姓名'
+
+      activity:
+        content: '留言內容'
