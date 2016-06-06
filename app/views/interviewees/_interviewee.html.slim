@@ -27,10 +27,13 @@
           th 職缺
           td = interviewee.position.name
         tr
-          th 備註
-          td = interviewee.note
+          th 聯絡方式
+          td = interviewee.contact_method
           th 面試人員
           td = interviewee.interviewer.try(:name)
+        tr
+          th 備註
+          td[colspan="3"] = interviewee.note
         tr
           th 面試時間
           td
