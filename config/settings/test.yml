@@ -1,5 +1,4 @@
 smtp:
-<<<<<<< HEAD
   hostname:
   username:
   password:
@@ -10,12 +9,3 @@ domain: 'localhost'
 slack:
   app_id: ''
   app_secret: ''
-=======
-  hostname: smtp.example.com
-  username: postmaster@example.com
-  password: 12345678
-
-slack:
-  app_id:
-  app_secret:
->>>>>>> 215cd829c1fc2cad0672daaaac02c8e96e7c0373
