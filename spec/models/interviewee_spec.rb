@@ -11,12 +11,12 @@ RSpec.describe Interviewee, type: :model do
 		it { should have_db_column(:position_id).of_type(:integer)}
 		it { should have_db_column(:interview_at).of_type(:datetime)}
 		it { should have_db_column(:note).of_type(:string)}
-		it { should have_db_column(:result).of_type(:string)}
 		it { should have_db_column(:created_at).of_type(:datetime)}
 		it { should have_db_column(:updated_at).of_type(:datetime)}
 		it { should have_db_column(:status).of_type(:integer)}
 		it { should have_db_column(:resume).of_type(:string)}
 		it { should have_db_column(:interviewer_id).of_type(:integer)}
+		it { should have_db_column(:contact_method).of_type(:string)}
 	end
 
 	context "checking validations" do

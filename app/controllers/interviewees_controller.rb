@@ -11,6 +11,7 @@ class IntervieweesController < ApplicationController
     @interviewees = @interviewees.where(status: params[:status])
   end
 
+  # search result
   def result
 
     if params[:keyword].blank?
