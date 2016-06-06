@@ -73,7 +73,7 @@ class IntervieweesController < ApplicationController
     params.require(:interviewee)
           .permit(:name, :gender, :number, :status,
                   :email, :phone, :position_id, :interview_at,
-                  :note, :result, :resume, :interviewer_id)
+                  :contact_method, :note, :result, :resume, :interviewer_id)
   end
 
 end
