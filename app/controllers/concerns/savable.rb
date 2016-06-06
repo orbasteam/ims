@@ -23,11 +23,11 @@ module Savable
         render json: get_var
       else
         flash[:success] = I18n.t('form.saved')
-        redirect_to(params[:save_next] ? new_path : edit_path(get_var))
+        after_save_success(get_var)
       end
 
     rescue Exception => e
-      after_save(e)
+      after_save_failed(e)
     end
 
   end
@@ -46,18 +46,18 @@ module Savable
         render json: get_var
       else
         flash[:success] = I18n.t('form.saved')
-        redirect_to edit_path(get_var)
+        after_save_success(get_var)
       end
 
     rescue Exception => e
-      after_save(e)
+      after_save_failed(e)
     end
 
   end
 
   private
 
-  def after_save(exception)
+  def after_save_failed(exception)
 
     if request.xhr?
       render json: { message: exception.message }, status: :unprocessable_entity
@@ -68,6 +68,10 @@ module Savable
 
   end
 
+  def after_save_success(param)
+    redirect_to index_path(param)
+  end
+
   def render_form_template
     render :form
   end
@@ -75,6 +79,12 @@ module Savable
   def new_path
     path = ['new', module_name, model_name.underscore, 'path'].compact
     send(path.join('_'))
+  end
+
+  def index_path(param)
+    path = [module_name, model_name.underscore.pluralize, 'path'].compact
+    send(path.join('_'))
+
   end
 
   def edit_path(param)
