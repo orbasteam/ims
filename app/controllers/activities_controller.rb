@@ -9,8 +9,13 @@ class ActivitiesController < ApplicationController
 
   private
 
-  def edit_path(param)
-    edit_interviewee_path(param.interviewee_id)
+  def after_save_success(param)
+    redirect_to edit_interviewee_path(param.interviewee_id)
+  end
+
+  def after_save_failed(exception)
+    flash[:alert] = exception.message
+    redirect_to edit_interviewee_path(params[:interviewee_id])
   end
 
   def strong_params
