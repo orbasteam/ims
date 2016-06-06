@@ -87,7 +87,7 @@ RSpec.describe IntervieweesController, type: :controller do
       end
 
       it "response redirect when success" do
-        expect(response).to redirect_to edit_interviewee_path(assigns(:interviewee).to_param)
+        expect(response).to redirect_to interviewees_path
       end
 
       it "create data" do
@@ -142,7 +142,7 @@ RSpec.describe IntervieweesController, type: :controller do
       }
 
       it "redirect success" do
-        expect(response).to redirect_to edit_interviewee_path interviewee.to_param
+        expect(response).to redirect_to interviewees_path
       end
 
       it "update success" do

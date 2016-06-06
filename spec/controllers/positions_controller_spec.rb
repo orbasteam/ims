@@ -73,7 +73,7 @@ RSpec.describe PositionsController, type: :controller do
 
       it "response redirect when success" do
         position = Position.last
-        expect(response).to redirect_to edit_position_path(position.id)
+        expect(response).to redirect_to positions_path
       end
 
       it "create data" do
@@ -125,7 +125,7 @@ RSpec.describe PositionsController, type: :controller do
   	it "response redirect when success" do
       sign_in user
   		put :update, id: position.to_param, position: valid_params
-  		expect(response).to redirect_to edit_position_path position.to_param
+  		expect(response).to redirect_to positions_path
   	end
 
   	it "render :edit when failed" do
