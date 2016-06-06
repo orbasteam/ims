@@ -1,5 +1,7 @@
 class Activity < ActiveRecord::Base
 
+  validates :content, presence: true
+
   belongs_to :interviewee
 
   def self.group_count(interviewees)
