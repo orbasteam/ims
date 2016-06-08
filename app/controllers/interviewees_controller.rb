@@ -22,7 +22,7 @@ class IntervieweesController < ApplicationController
   end
 
   def calendar
-    @interviewees = @interviewees.where(status: Interviewee.statuses[:waiting])
+    @interviewees = @interviewees.where(status: Interviewee.statuses[:waiting_interview])
 
     result = []
     @interviewees.each do |interviewee|

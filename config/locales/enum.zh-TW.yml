@@ -3,15 +3,18 @@ zh-TW:
   enums:
     interviewee:
       status:
-        pending: 未聯絡
-        no_response: 尚未回應
-        waiting:     等待面試
-        refuse_interview: 拒絕面試
-        candidate:   候選
-        failed:      不符資格
-        admit:       錄取
-        refuse:      拒絕加入
-        black:       黑名單
+        pending: '未聯絡'
+        no_response: '尚未回應'
+        send_email:  '待寄信'
+        arrange_interview: '待約面試'
+        waiting_interview: '等待面試'
+        refuse_interview:  '拒絕面試'
+        failed:  '不符資格'
+        admit:   '錄取'
+        refuse:  '拒絕加入'
+        black:   '黑名單'
+        abandon: '放棄'
+
 
       gender:
         male: 先生

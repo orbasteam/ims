@@ -5,7 +5,18 @@ class Interviewee < ActiveRecord::Base
   validates :name, :gender, :number, :position_id, presence: true
 
   enum gender: { female: 0, male: 1 }
-  enum status: [:pending, :no_response, :waiting, :refuse_interview, :candidate, :failed, :admit, :refuse, :black]
+  enum status: {
+      pending: 0,
+      no_response: 1,
+      send_email: 9,
+      arrange_interview: 10,
+      waiting_interview: 2,
+      refuse_interview: 3,
+      failed: 5,
+      admit: 6,
+      black: 7,
+      abandon: 8
+  }
 
   belongs_to :position
   belongs_to :interviewer, foreign_key: :interviewer_id, class_name: 'User'

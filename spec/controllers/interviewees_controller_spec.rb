@@ -169,6 +169,18 @@ RSpec.describe IntervieweesController, type: :controller do
       expect(response).to be_success
     end
 
+    it "assigns @interviewees" do
+
+      create(:interviewee)
+      interviewee = create(:interviewee)
+      interviewee.status = :waiting_interview
+      interviewee.save
+
+      sign_in user
+      get :calendar, format: :xml
+      expect(assigns(:interviewees).count).to eq 1
+    end
+
   end
 
   describe "GET #result" do
