@@ -1,4 +1,4 @@
-nav.navbar.navbar-default.navbar-static-top
+div.navbar.navbar-default
   .container-fluid
     /! Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -14,11 +14,24 @@ nav.navbar.navbar-default.navbar-static-top
         = nav_li '面試狀況', interviewees_path
         = nav_li '職缺設定', positions_path
 
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown
+          = link_to 'javascript:void(0)', class: 'dropdown-toggle', :"data-toggle" => "dropdown" do
+            span
+              = current_user.name
+            '
+            b.caret
+          ul.dropdown-menu
+
+            li
+              = link_to '編輯', edit_user_path
+            li.divider
+            li
+              = link_to t('page.logout'), destroy_user_session_path, method: :delete
+
       = form_tag result_interviewees_path, class: 'navbar-form navbar-right', role: :search, method: :get do
         .input-group
           = text_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: 'search'
           .input-group-btn
             = button_tag nil, class: 'btn btn-default', type: :submit do
               = fa_icon('search')
-
-            = link_to t('page.logout'), destroy_user_session_path, class: 'btn btn-default', method: :delete
