@@ -3,9 +3,6 @@ h3 面試人員設定
 
 = simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
 
-  - unless in_edit?
-    = f.hidden_field :interviewer_id, value: current_user.id
-
   - if in_edit?
     = f.input :status, label: '狀態', collection: Interviewee.statuses,
               include_blank: false, label_method: -> (s) { t("enums.interviewee.status.#{s.first}") },
@@ -34,6 +31,8 @@ h3 面試人員設定
 
   = f.input :interview_at, label: '面試時間', as: :string,
             input_html: {class: 'datetime-picker'}
+
+  = f.association :interviewer, label: '面試人員'
 
   = f.input :note, label: '備註'
 

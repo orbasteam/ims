@@ -51,6 +51,7 @@ RSpec.describe IntervieweesController, type: :controller do
       sign_in user
       get :new
       expect(assigns(:interviewee)).to be_a Interviewee
+      expect(assigns(:interviewee).interviewer).to eq user
     end
   end
 

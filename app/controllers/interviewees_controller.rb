@@ -11,6 +11,11 @@ class IntervieweesController < ApplicationController
     @interviewees = @interviewees.where(status: params[:status])
   end
 
+  def new
+    @interviewee.interviewer = current_user
+    super
+  end
+
   # search result
   def result
 
