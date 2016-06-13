@@ -4,15 +4,19 @@ class UsersController < ApplicationController
 
   def update
     begin
-      get_var.update! strong_params
 
-      update_password
+      ActiveRecord::Base.transaction do
+        get_var.update! strong_params
+
+        update_password
+      end
 
       flash[:success] = I18n.t('form.saved')
-      after_save_success(get_var)
+      redirect_to edit_user_path
 
     rescue Exception => e
-      redirect_to edit_user_path
+      flash.now[:alert] = e.message
+      render :form
     end
 
   end
@@ -20,10 +24,11 @@ class UsersController < ApplicationController
   private
 
   def update_password
-    if params[:user][:password].present? &&
-        params[:user][:password_confirmation].present?
+    if params[:user][:password].present?
 
-      @user.update_with_password(params[:user])
+      unless @user.update_with_password(params[:user].symbolize_keys)
+        raise ActiveRecord::RecordInvalid.new(@user)
+      end
 
     end
   end
@@ -33,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def strong_params
-    params.require('user').permit(:name, :password, :password_confirmation)
+    params.require('user').permit(:name)
   end
 
 end

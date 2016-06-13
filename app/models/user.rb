@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   # :registerable, :trackable, :validatable
   devise :database_authenticatable, :rememberable, :recoverable
 
+  validates_confirmation_of :password
+
   has_many :interviewees
 
 end
