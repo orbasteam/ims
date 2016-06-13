@@ -19,3 +19,6 @@ zh-TW:
 
       activity:
         content: '留言內容'
+
+      position:
+        name: '職缺名稱'
