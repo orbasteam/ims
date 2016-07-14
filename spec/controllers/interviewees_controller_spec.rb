@@ -88,7 +88,8 @@ RSpec.describe IntervieweesController, type: :controller do
       end
 
       it "response redirect when success" do
-        expect(response).to redirect_to interviewees_path
+        interviewee = Interviewee.last
+        expect(response).to redirect_to interviewees_path status: interviewee['status']
       end
 
       it "create data" do
@@ -143,7 +144,8 @@ RSpec.describe IntervieweesController, type: :controller do
       }
 
       it "redirect success" do
-        expect(response).to redirect_to interviewees_path
+        interviewee.reload
+        expect(response).to redirect_to interviewees_path(status: interviewee['status'])
       end
 
       it "update success" do

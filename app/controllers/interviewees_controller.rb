@@ -62,6 +62,10 @@ class IntervieweesController < ApplicationController
 
   private
 
+  def after_save_success(param)
+    redirect_to interviewees_path status: param['status']
+  end
+
   def set_interviewees
     @interviewees = Interviewee
                       .includes(:position, :interviewer)
