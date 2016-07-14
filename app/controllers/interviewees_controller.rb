@@ -9,6 +9,7 @@ class IntervieweesController < ApplicationController
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
     @interviewees = @interviewees.where(status: params[:status])
+    set_activity_count
   end
 
   def new
@@ -24,6 +25,7 @@ class IntervieweesController < ApplicationController
     end
 
     @interviewees = @interviewees.where('name like ? or number = ?', "%#{params[:keyword]}%", params[:keyword])
+    set_activity_count
   end
 
   def calendar
@@ -75,6 +77,9 @@ class IntervieweesController < ApplicationController
 
   def set_interviewee_status
     @status = Interviewee.group(:status).count
+  end
+
+  def set_activity_count
     @activity_count = Activity.group_count(@interviewees)
   end
 
