@@ -4,7 +4,6 @@ class IntervieweesController < AdminController
 
   before_action :set_interviewees, only: [:index, :result, :calendar]
   before_action :set_interviewee_status, only: [:index, :result]
-  before_action :build_relations, only: [:new, :create, :edit, :update]
 
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
@@ -58,6 +57,16 @@ class IntervieweesController < AdminController
   end
 
   private
+
+  def set_empty_resource
+    super
+    build_relations
+  end
+
+  def after_save_failed(exception)
+    build_relations
+    super
+  end
 
   def after_save_success(param)
     redirect_to interviewees_path status: param['status']
