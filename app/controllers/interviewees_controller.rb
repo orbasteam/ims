@@ -94,7 +94,7 @@ class IntervieweesController < AdminController
   def strong_params
     params.require(:interviewee)
       .permit(:finish_edit, :name, :number, :status, :position_id, :interview_at, :note,
-              :name_en, :birthday, :native_place, :id_number, :blood_type, :communicate_address, :communicate_phone,
+              :name_en, :birthday, :native_place, :id_number, :gender, :blood_type, :communicate_address, :communicate_phone,
               :residence_address, :residence_phone, :email, :phone, :over_time, :marriage, :military, :relatives,
               :expertise, :hobby, :health, :genetic_disease, :genetic_disease_note, :nociceptive_disease,
               :nociceptive_disease_note, :other_disease, :other_disease_note, :chinese, :taiwanese, :hakka, :english,

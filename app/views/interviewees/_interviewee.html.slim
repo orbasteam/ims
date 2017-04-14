@@ -4,7 +4,8 @@
     .panel-heading
       = link_to edit_interviewee_path(interviewee) do
         = "#{interviewee.name} "
-        = t("enums.interviewee.gender.#{interviewee.gender}")
+        - if interviewee.gender.present?
+          = t("enums.interviewee.gender.#{interviewee.gender}")
 
       label.label.label-warning[style="margin-left: 20px"]
         = t("enums.interviewee.status.#{interviewee.status}")

@@ -12,8 +12,8 @@ class Interviewee < ActiveRecord::Base
   accepts_nested_attributes_for :families,    reject_if: -> (attributes) { attributes[:name].blank? }
   accepts_nested_attributes_for :supervisors, reject_if: -> (attributes) { attributes[:name].blank? }
 
-  validates :name, :gender, :number, :position_id, presence: true
-  validates :id_number, format: { with: /\A[A-Z]\d{9}\z/, message: "格式不合" }
+  validates :name, :number, :position_id, presence: true
+  validates :id_number, format: { with: /\A[A-Z]\d{9}\z/, message: "格式不合" }, if: -> { self.id_number.present? }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   enum gender: { female: 0, male: 1 }
