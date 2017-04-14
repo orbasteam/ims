@@ -1,0 +1,13 @@
+.panel.panel-default.margin-top-10
+  .panel-body.font-normal
+    .form-group
+      label.col-sm-2.control-label
+        | 可到職日
+      .col-sm-10
+        = f.text_field :onboard_date, class: 'form-control datepicker'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 希望待遇
+      .col-sm-10
+        = f.text_field :wish_salary, class: 'form-control'

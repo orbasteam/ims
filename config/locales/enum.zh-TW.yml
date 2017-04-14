@@ -15,7 +15,16 @@ zh-TW:
         black:   '黑名單'
         abandon: '放棄'
 
-
       gender:
-        male: 先生
-        female: 小姐
+        male: '先生'
+        female: '小姐'
+
+      military:
+        military_yet: '未役'
+        military_finish: '已役'
+        military_no_need: '免役'
+
+    education:
+      school_type:
+        day: '日間'
+        night: '夜間'

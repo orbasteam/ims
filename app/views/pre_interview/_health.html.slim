@@ -1,0 +1,36 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 健康狀況
+  .panel-body.font-normal
+    p 過去是否有重大疾病
+
+    .row
+      .col-md-12
+        .checkbox
+          label
+            = f.check_box :health
+            |  否
+
+    .row
+      .col-md-12
+        .checkbox
+          label
+            = f.check_box :genetic_disease
+            |  遺傳性疾病
+        = f.text_field :genetic_disease_note, class: 'form-control'
+
+    .row
+      .col-md-12
+        .checkbox
+          label
+            = f.check_box :nociceptive_disease
+            |  傷害性疾病
+        = f.text_field :nociceptive_disease_note, class: 'form-control'
+
+    .row
+      .col-md-12
+        .checkbox
+          label
+            = f.check_box :other_disease
+            |  其他
+        = f.text_field :other_disease_note, class: 'form-control'

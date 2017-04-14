@@ -1,4 +1,4 @@
-class PositionsController < ApplicationController
+class PositionsController < AdminController
 
   include Savable
 

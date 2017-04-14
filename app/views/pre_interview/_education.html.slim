@@ -1,0 +1,32 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 學歷
+  .panel-body.font-normal
+    table.table.table-bordered#education-table
+      thead
+        tr
+          th 學校名稱
+          th 科系
+          th 畢業
+          th 日（夜）間
+      tbody
+        = f.fields_for :educations, wrapper: false do |ff|
+          tr.fields
+            td
+              = ff.hidden_field :id
+              = ff.text_field :name, class: 'form-control'
+            td = ff.text_field :department, class: 'form-control'
+            td[style="vertical-align: middle"]
+              .checkbox[style="padding: 0"]
+                label
+                  = ff.check_box :graduated
+            td
+              - Education.school_types.each do |school_type|
+                .radio.radio-inline
+                  label
+                    = ff.radio_button :school_type, school_type.first,
+                            {checked: ff.object.school_type.to_s == school_type.first.to_s}
+                    = t "enums.education.school_type.#{school_type.first}"
+
+    = f.link_to_add :educations, class: 'btn btn-sm btn-primary', data: {target: "#education-table"} do
+      = fa_icon('plus')

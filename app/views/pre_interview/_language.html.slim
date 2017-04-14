@@ -1,0 +1,74 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 語言能力
+  .panel-body.font-normal
+    table.table.table-bordered
+      tr
+        td 略懂
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :chinese, 0, {checked: f.object.chinese == 0}
+              | 國語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :taiwanese, 0, {checked: f.object.taiwanese == 0}
+              | 台語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :hakka, 0, {checked: f.object.hakka == 0}
+              | 客家語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :english, 0, {checked: f.object.english == 0}
+              | 英文
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :japanese, 0, {checked: f.object.japanese == 0}
+              | 日文
+
+        td
+          = f.text_field :other_language_unfamiliar, class: 'form-control', placeholder: '其他'
+
+      tr
+        td 精通
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :chinese, 0, {checked: f.object.chinese == 1}
+              | 國語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :taiwanese, 0, {checked: f.object.taiwanese == 1}
+              | 台語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :hakka, 0, {checked: f.object.hakka == 1}
+              | 客家語
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :english, 0, {checked: f.object.english == 1}
+              | 英文
+
+        td
+          .radio.radio-inline
+            label
+              = f.radio_button :japanese, 0, {checked: f.object.japanese == 1}
+              | 日文
+
+        td
+          = f.text_field :other_language_familiar, class: 'form-control', placeholder: '其他'

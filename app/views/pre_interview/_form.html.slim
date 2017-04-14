@@ -1,0 +1,34 @@
+= render partial: 'pre_interview/personal', locals: {f: f, disabled: disabled}
+
+= render partial: 'pre_interview/education', locals: {f: f}
+
+= render partial: 'pre_interview/experience', locals: {f: f}
+
+= render partial: 'pre_interview/family', locals: {f: f}
+
+= render partial: 'pre_interview/health', locals: {f: f}
+
+= render partial: 'pre_interview/language', locals: {f: f}
+
+= render partial: 'pre_interview/supervisor', locals: {f: f}
+
+= render partial: 'pre_interview/last_part', locals: {f: f}
+
+javascript:
+  $(function () {
+      $(window).on('nested:fieldAdded', function () {
+          $.material.init();
+      });
+
+      $("#interviewee_birthday").datepicker({
+          format: 'yyyy-mm-dd',
+          language: 'zh-TW',
+          startView: "decade"
+      });
+  });
+
+  window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
+      var $tr = $($(link).data('target')).find('tr:last'),
+          $content = $(content);
+      return $content.insertAfter($tr);
+  };

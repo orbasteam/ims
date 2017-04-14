@@ -1,0 +1,166 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 基本資料
+  .panel-body.font-normal
+
+    .form-group
+      label.col-sm-2.control-label
+        | 姓名（中文）
+
+      .col-sm-10
+        = f.text_field :name, class: 'form-control', disabled: disabled
+
+    .form-group
+      label.col-sm-2.control-label
+        | 姓名（英文）
+
+      .col-sm-10
+        = f.text_field :name_en, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 性別
+
+      .col-sm-4
+        - Interviewee.genders.each do |i|
+          .radio.radio-inline
+            label
+              = f.radio_button :gender, i.first, checked: f.object.gender == i.first, disabled: disabled
+              = gender(i.second)
+
+    .form-group
+      label.col-sm-2.control-label
+        | 應徵項目
+
+      .col-sm-10
+        - if disabled
+          = f.text_field :position_name, value: f.object.position.name, class: 'form-control', disabled: disabled
+        - else
+          = f.collection_select :position_id, Position.all, :id, :name, {}, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 出生日期
+
+      .col-sm-10
+        = f.text_field :birthday, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 籍貫
+
+      .col-sm-10
+        = f.text_field :native_place, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 身份證號碼
+
+      .col-sm-10
+        = f.text_field :id_number, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 血型
+
+      .col-sm-10
+        = f.text_field :blood_type, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 通訊地址
+
+      .col-sm-4
+        = f.text_field :communicate_address, class: 'form-control'
+
+      label.col-sm-2.control-label
+        | 電話
+
+      .col-sm-4
+        = f.text_field :communicate_phone, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 戶籍地址
+
+      .col-sm-4
+        = f.text_field :residence_address, class: 'form-control'
+
+      label.col-sm-2.control-label
+        | 電話
+
+      .col-sm-4
+        = f.text_field :residence_phone, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | Email
+
+      .col-sm-10
+        = f.text_field :email, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 行動電話
+
+      .col-sm-10
+        = f.text_field :phone, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 加班
+
+      .col-sm-10
+        .radio.radio-inline
+          label
+            = f.radio_button :over_time, 1, {checked: f.object.over_time == true}
+            | 可
+        .radio.radio-inline
+          label
+            = f.radio_button :over_time, 0, {checked: f.object.over_time == false}
+            | 否
+
+    .form-group
+      label.col-sm-2.control-label
+        | 婚姻
+
+      .col-sm-10
+        .radio.radio-inline
+          label
+            = f.radio_button :marriage, 1, {checked: f.object.marriage == true}
+            | 已婚
+        .radio.radio-inline
+          label
+            = f.radio_button :marriage, 0, {checked: f.object.marriage == false}
+            | 未婚
+
+    .form-group
+      label.col-sm-2.control-label
+        | 兵役
+
+      .col-sm-10
+        - Interviewee.militaries.each do |military|
+          .radio.radio-inline
+            label
+              = f.radio_button :military, military.first,
+                    {checked: f.object.military.to_s == military.first.to_s}
+              = t "enums.interviewee.military.#{military.first}"
+
+    .form-group
+      label.col-sm-3.control-label
+        | 現在本公司服務之親友姓名
+
+      .col-sm-9
+        = f.text_field :relatives, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 專長
+      .col-sm-10
+        = f.text_field :expertise, class: 'form-control'
+
+    .form-group
+      label.col-sm-2.control-label
+        | 興趣
+      .col-sm-10
+        = f.text_field :hobby, class: 'form-control'

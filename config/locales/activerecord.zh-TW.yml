@@ -11,8 +11,7 @@ zh-TW:
         note: '備註'
         status: '狀態'
         resume: '履歷'
-        interviewer_id: '面試官'
-        contact_method: '聯絡方式'
+        id_number: '身份證字號'
       user:
         email: '電子郵件'
         name: '姓名'

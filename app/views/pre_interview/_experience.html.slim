@@ -1,0 +1,27 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 經歷
+  .panel-body.font-normal
+    table.table.table-bordered#experience-table
+      thead
+        tr
+          th[style="width: 200px"] 公司名稱
+          th[style="width: 120px"] 職稱
+          th[style="width: 150px"] 任職期間
+          th[style="width: 120px"] 年資
+          th[style="width: 120px"] 薪資
+          th 離職原因
+      tbody
+        = f.fields_for :experiences, wrapper: false do |ff|
+          tr.fields
+            th
+              = ff.hidden_field :id
+              = ff.text_field :name, class: 'form-control'
+            th = ff.text_field :title, class: 'form-control'
+            th = ff.text_field :period, class: 'form-control'
+            th = ff.text_field :seniority, class: 'form-control'
+            th = ff.text_field :salary, class: 'form-control'
+            th = ff.text_field :reason, class: 'form-control'
+
+    = f.link_to_add :experiences, class: 'btn btn-sm btn-primary', data: {target: "#experience-table"} do
+      = fa_icon('plus')

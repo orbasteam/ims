@@ -31,6 +31,13 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
   resource :user, only: [:edit, :update]
 
+  scope 'pre-interview', controller: 'pre_interview', as: 'pre_interview' do
+    get 'consent/:token', action: :consent, as: 'consent'
+    get 'edit/:token', action: :edit, as: 'edit'
+    patch 'update/:token', action: 'update', as: 'update'
+    get 'complete', action: 'complete', as: 'complete'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

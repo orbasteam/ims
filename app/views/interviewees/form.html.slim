@@ -1,7 +1,77 @@
 
 h3 面試人員設定
 
-= simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
+= nested_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
+
+  = link_to '回上一頁', interviewees_path, class: 'btn btn-raised btn-default'
+  = f.submit class: 'btn btn-primary', value: '送出'
+
+  - if in_edit?
+    .pull-right
+      = button_tag '列印', class: 'btn btn-raised btn-default', type: :button
+
+  .panel.panel-default.margin-top-10
+    .panel-heading.font-normal
+      | 管理員使用
+    .panel-body.font-normal
+
+      - if in_edit?
+        .form-group
+          label.col-sm-2.control-label 狀態
+
+          .col-sm-10
+            = f.collection_select :position_id, Interviewee.statuses,
+                    :first, -> (s) { t("enums.interviewee.status.#{s.first}") },
+                    {}, class: 'form-control'
+
+      .form-group
+        label.col-sm-2.control-label 已編輯
+
+        .col-sm-10
+          .togglebutton
+            label
+              = f.check_box :finish_edit
+
+      .form-group
+        label.col-sm-3.col-md-2.control-label
+          | 履歷上傳
+        .col-sm-7.col-md-9
+          = f.file_field :resume, class: 'form-control'
+
+        - if f.object.resume_url
+          .col-md-1.col-sm-2
+            = link_to '下載', f.object.resume_url, class: 'btn btn-primary btn-sm', target: '_blank'
+
+      .form-group
+        label.col-sm-2.control-label 編號
+
+        .col-sm-10
+          = f.text_field :number, class: 'form-control'
+
+      .form-group
+        label.col-sm-2.control-label 面試時間
+
+        .col-sm-10
+          = f.text_field :interview_at, class: 'form-control datetime-picker'
+
+      .form-group
+        label.col-sm-2.control-label 備註
+
+        .col-sm-10
+          = f.text_field :note, class: 'form-control'
+
+      - if in_edit?
+        .form-group
+          label.col-sm-2.control-label 履歷填寫網址
+
+          .col-sm-10
+            p.form-control-static
+              = link_to pre_interview_consent_url(f.object.token), pre_interview_consent_url(f.object.token),
+                      target: '_blank', id: '#interviewee-url'
+
+  = render partial: 'pre_interview/form', locals: {f: f, disabled: false}
+
+/= simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
 
   - if in_edit?
     = f.input :status, label: '狀態', collection: Interviewee.statuses,
@@ -27,21 +97,17 @@ h3 面試人員設定
   = f.input :phone, label: '電話'
   = f.association :position, label: '職缺'
 
-  = f.input :contact_method, label: '聯絡方式'
-
   = f.input :interview_at, label: '面試時間', as: :string,
             input_html: {class: 'datetime-picker'}
-
-  = f.association :interviewer, label: '面試人員'
 
   = f.input :note, label: '備註'
 
   .col-md-offset-1
     = form_action interviewees_path
 
-hr
+/hr
 
-- if in_edit?
+/- if in_edit?
 
   h3 活動記錄
 

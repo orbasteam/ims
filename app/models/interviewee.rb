@@ -2,7 +2,19 @@ class Interviewee < ActiveRecord::Base
 
   mount_uploader :resume, ResumeUploader
 
+  has_many :educations
+  has_many :experiences
+  has_many :families
+  has_many :supervisors
+
+  accepts_nested_attributes_for :educations,  reject_if: -> (attributes) { attributes[:name].blank? }
+  accepts_nested_attributes_for :experiences, reject_if: -> (attributes) { attributes[:name].blank? }
+  accepts_nested_attributes_for :families,    reject_if: -> (attributes) { attributes[:name].blank? }
+  accepts_nested_attributes_for :supervisors, reject_if: -> (attributes) { attributes[:name].blank? }
+
   validates :name, :gender, :number, :position_id, presence: true
+  validates :id_number, format: { with: /\A[A-Z]\d{9}\z/, message: "格式不合" }
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   enum gender: { female: 0, male: 1 }
   enum status: {
@@ -17,13 +29,18 @@ class Interviewee < ActiveRecord::Base
       black: 7,
       abandon: 8
   }
+  enum military: {
+    military_yet: 1,
+    military_finish: 2,
+    military_no_need: 3
+  }
 
   belongs_to :position
-  belongs_to :interviewer, foreign_key: :interviewer_id, class_name: 'User'
   has_many :activities, -> { order(created_at: :desc) }
 
   before_create -> {
     self.status = :pending
+    self.token  = SecureRandom.hex(32)
   }
 
   after_update -> {
@@ -33,5 +50,12 @@ class Interviewee < ActiveRecord::Base
     })
 
   }, if: :status_changed?
+
+  def build_all_relations
+    self.educations.build  if self.educations.empty?
+    self.experiences.build if self.experiences.empty?
+    self.families.build    if self.families.empty?
+    self.supervisors.build if self.supervisors.empty?
+  end
 
 end

@@ -1,0 +1,21 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 家庭狀況
+  .panel-body.font-normal
+    table.table.table-bordered#family-table
+      thead
+        tr
+          th 稱謂
+          th 姓名
+          th 職業或就讀學校
+      tbody
+        = f.fields_for :families, wrapper: false do |ff|
+          tr.fields
+            td
+              = ff.hidden_field :id
+              = ff.text_field :title, class: 'form-control'
+            td = ff.text_field :name, class: 'form-control'
+            td = ff.text_field :job, class: 'form-control'
+
+    = f.link_to_add :families, class: 'btn btn-sm btn-primary', data: {target: "#family-table"} do
+      = fa_icon('plus')

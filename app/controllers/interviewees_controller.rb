@@ -1,20 +1,15 @@
-class IntervieweesController < ApplicationController
+class IntervieweesController < AdminController
 
   include Savable
 
-  before_action :authenticate_user!
   before_action :set_interviewees, only: [:index, :result, :calendar]
   before_action :set_interviewee_status, only: [:index, :result]
+  before_action :build_relations, only: [:new, :create, :edit, :update]
 
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
     @interviewees = @interviewees.where(status: params[:status])
     set_activity_count
-  end
-
-  def new
-    @interviewee.interviewer = current_user
-    super
   end
 
   # search result
@@ -70,7 +65,7 @@ class IntervieweesController < ApplicationController
 
   def set_interviewees
     @interviewees = Interviewee
-                      .includes(:position, :interviewer)
+                      .includes(:position)
                       .page(params[:page])
                       .order(created_at: :desc)
   end
@@ -83,11 +78,23 @@ class IntervieweesController < ApplicationController
     @activity_count = Activity.group_count(@interviewees)
   end
 
+  def build_relations
+    @interviewee.build_all_relations
+  end
+
   def strong_params
     params.require(:interviewee)
-          .permit(:name, :gender, :number, :status,
-                  :email, :phone, :position_id, :interview_at,
-                  :contact_method, :note, :result, :resume, :interviewer_id)
+      .permit(:finish_edit, :name, :number, :status, :position_id, :interview_at, :note,
+              :name_en, :birthday, :native_place, :id_number, :blood_type, :communicate_address, :communicate_phone,
+              :residence_address, :residence_phone, :email, :phone, :over_time, :marriage, :military, :relatives,
+              :expertise, :hobby, :health, :genetic_disease, :genetic_disease_note, :nociceptive_disease,
+              :nociceptive_disease_note, :other_disease, :other_disease_note, :chinese, :taiwanese, :hakka, :english,
+              :japanese, :onboard_date, :wish_salary, :other_language_familiar, :other_language_unfamiliar,
+              educations_attributes: [:id, :name, :department, :graduated, :school_type],
+              experiences_attributes: [:id, :name, :title, :period, :seniority, :salary, :reason],
+              families_attributes: [:id, :title, :name, :job],
+              supervisors_attributes: [:id, :name, :department, :title, :phone, :contact_time]
+      )
   end
 
 end

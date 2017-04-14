@@ -1,0 +1,26 @@
+.panel.panel-default.margin-top-10
+  .panel-heading.font-normal
+    | 可詢問的前直屬主管
+  .panel-body.font-normal
+    table.table.table-bordered#supervisor-table
+      thead
+        tr
+          th 姓名
+          th 服務單位
+          th 職稱
+          th 聯絡電話
+          th 方便聯絡時間
+
+      tbody
+        = f.fields_for :supervisors, wrapper: false do |ff|
+          tr.fields
+            td
+              = ff.hidden_field :id
+              = ff.text_field :name, class: 'form-control'
+            td = ff.text_field :department, class: 'form-control'
+            td = ff.text_field :title, class: 'form-control'
+            td = ff.text_field :phone, class: 'form-control'
+            td = ff.text_field :contact_time, class: 'form-control'
+
+    = f.link_to_add :supervisors, class: 'btn btn-sm btn-primary', data: {target: "#supervisor-table"} do
+      = fa_icon('plus')

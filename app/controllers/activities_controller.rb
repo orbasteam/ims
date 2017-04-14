@@ -1,4 +1,4 @@
-class ActivitiesController < ApplicationController
+class ActivitiesController < AdminController
 
   include Savable
 

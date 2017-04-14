@@ -16,6 +16,7 @@
 //= require_directory ../../../vendor/assets/javascripts/
 //= require bootstrap-sprockets
 //= require bootstrap-material-design
+//= require jquery_nested_form
 
 toastr.options = {
     "closeButton": false,
