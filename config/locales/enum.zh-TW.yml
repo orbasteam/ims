@@ -19,6 +19,10 @@ zh-TW:
         male: '先生'
         female: '小姐'
 
+      sex:
+        male: '男'
+        female: '女'
+
       military:
         military_yet: '未役'
         military_finish: '已役'

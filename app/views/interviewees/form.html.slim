@@ -8,7 +8,7 @@ h3 面試人員設定
 
   - if in_edit?
     .pull-right
-      = button_tag '列印', class: 'btn btn-raised btn-default', type: :button
+      = link_to '列印', print_interviewee_path, class: 'btn btn-raised btn-default'
 
   .panel.panel-default.margin-top-10
     .panel-heading.font-normal
@@ -60,50 +60,7 @@ h3 面試人員設定
         .col-sm-10
           = f.text_field :note, class: 'form-control'
 
-      - if in_edit?
-        .form-group
-          label.col-sm-2.control-label 履歷填寫網址
-
-          .col-sm-10
-            p.form-control-static
-              = link_to pre_interview_consent_url(f.object.token), pre_interview_consent_url(f.object.token),
-                      target: '_blank', id: '#interviewee-url'
-
   = render partial: 'pre_interview/form', locals: {f: f, disabled: false}
-
-/= simple_form_for @interviewee, html: { class: 'form-horizontal' } do |f|
-
-  - if in_edit?
-    = f.input :status, label: '狀態', collection: Interviewee.statuses,
-              include_blank: false, label_method: -> (s) { t("enums.interviewee.status.#{s.first}") },
-              value_method: :first
-
-  .form-group
-    label.col-sm-3.col-md-2.control-label
-      | 履歷上傳
-    .col-sm-7.col-md-9
-      = f.file_field :resume, class: 'form-control'
-
-    - if f.object.resume_url
-      .col-md-1.col-sm-2
-        = link_to '下載', f.object.resume_url, class: 'btn btn-primary btn-sm', target: '_blank'
-
-  = f.input :number, label: '編號', autofocus: true
-  = f.input :gender, label: '性別', collection: Interviewee.genders,
-            as: :radio_buttons, label_method: -> (s) { gender(s.second) },
-            value_method: :first
-  = f.input :name, label: '姓名'
-  = f.input :email
-  = f.input :phone, label: '電話'
-  = f.association :position, label: '職缺'
-
-  = f.input :interview_at, label: '面試時間', as: :string,
-            input_html: {class: 'datetime-picker'}
-
-  = f.input :note, label: '備註'
-
-  .col-md-offset-1
-    = form_action interviewees_path
 
 /hr
 

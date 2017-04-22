@@ -21,4 +21,12 @@ module ApplicationHelper
     end
   end
 
+  def check(boolean)
+    boolean ? fa_icon('check-square-o') : fa_icon('square-o')
+  end
+
+  def language_check(level, value)
+    level == value ? check(true) : check(false)
+  end
+
 end

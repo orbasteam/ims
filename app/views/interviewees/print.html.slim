@@ -1,0 +1,258 @@
+doctype html
+html
+  head
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+
+    title
+      | 面試管理系統
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  body
+
+    .container
+      .well.font-normal
+
+        h3.text-center.no-margin 風尚數位科技股份有限公司
+
+        h4.text-center 面試人員資料表
+
+        p.text-danger
+          | 本人鄭重聲明以下所填各項資料均屬事實，並同意貴公司於建立個人資料集合於法令下，得蒐集、利用及處理以下各項資料，且得於本人到職後向資料記載單位諮詢
+          | ，如有虛報不實情事願受免職處分。
+
+        table.table.table-bordered
+          tr
+            th 中文姓名
+            td = @interviewee.name
+            th 性別
+            td
+              - Interviewee.genders.each do |gender|
+
+                label.margin-left-10
+                - if gender.first == @interviewee.gender
+                  = fa_icon('check-square-o')
+                - else
+                  = fa_icon('square-o')
+                '
+                = t("enums.interviewee.sex.#{gender.first}")
+            th 應徵項目
+            td = @interviewee.position.name
+          tr
+            th 英文姓名
+            td = @interviewee.name_en
+            th 出生日期
+            td = @interviewee.birthday
+            th 籍貫
+            td = @interviewee.native_place
+          tr
+            th 身份證號碼
+            td = @interviewee.id_number
+            th 血型
+            td = @interviewee.blood_type
+            th 加班
+            td = @interviewee.over_time ? '可' : '否'
+          tr
+            th 婚姻
+            td = @interviewee.marriage ? '已婚' : '未婚'
+            th 兵役
+            td = t("enums.interviewee.military.#{@interviewee.military}")
+            td
+            td
+          tr
+            th 通訊地址
+            td[colspan="2"] = @interviewee.communicate_address
+            th 電話
+            td[colspan="2"] = @interviewee.communicate_phone
+          tr
+            th 戶籍地址
+            td[colspan="2"] = @interviewee.residence_address
+            th 電話
+            td[colspan="2"] = @interviewee.residence_phone
+          tr
+            th Email
+            td[colspan="2"] = @interviewee.email
+            th 行動電話
+            td[colspan="2"] = @interviewee.phone
+
+        table.table.table-bordered
+          tr
+            th 專長
+            td = @interviewee.expertise
+            th 興趣
+            td = @interviewee.hobby
+            th 於本公司服務之親友姓名
+            td = @interviewee.relatives
+
+        h4 學歷
+        table.table.table-bordered
+          tr
+            th 學校名稱
+            th 科系
+            th 畢（肄）業
+            th 日（夜）間
+          - @interviewee.educations.each do |edu|
+            tr
+              td = edu.name
+              td = edu.department
+              td = edu.graduated ? '畢業' : '肄業'
+              td
+                - if edu.school_type == 'day'
+                  | 日間
+                - elsif edu.school_type == 'night'
+                  | 夜間
+
+        h4 經歷
+        table.table.table-bordered
+          tr
+            th 公司名稱
+            th 職稱
+            th 任職期間
+            th 年資
+            th 薪資
+            th 離職原因
+          - @interviewee.experiences.each do |exp|
+            tr
+              td = exp.name
+              td = exp.title
+              td = exp.period
+              td = exp.seniority
+              td = exp.salary
+              td = exp.reason
+        h4 家庭狀況
+        table.table.table-bordered
+          tr
+            th 稱謂
+            th 姓名
+            th 職業或就讀學校
+          - @interviewee.families.each do |family|
+            tr
+              td = family.title
+              td = family.name
+              td = family.job
+
+        h4 健康狀況
+        table.table.table-bordered
+          tr
+            td
+              h5.font-normal 過去有否重大疾病
+
+              label.margin-left-10
+                = check(@interviewee.health)
+                '
+                | 否
+
+              label.margin-left-10
+                = check(@interviewee.genetic_disease)
+                '
+                | 遺傳性疾病
+                '
+                u = @interviewee.genetic_disease_note
+
+              label.margin-left-10
+                = check(@interviewee.nociceptive_disease)
+                '
+                | 傷害性疾病
+                '
+                u = @interviewee.nociceptive_disease_note
+
+              label.margin-left-10
+                = check(@interviewee.other_disease)
+                '
+                | 其他
+                '
+                u = @interviewee.other_disease_note
+
+        h4 語言能力
+        table.table.table-bordered
+          tr
+            td 略通
+            td
+              label.margin-left-10
+                = language_check(0, @interviewee.chinese)
+                '
+                | 國語
+
+              label.margin-left-10
+                = language_check(0, @interviewee.taiwanese)
+                '
+                | 台語
+
+              label.margin-left-10
+                = language_check(0, @interviewee.hakka)
+                '
+                | 客語
+
+              label.margin-left-10
+                = language_check(0, @interviewee.english)
+                '
+                | 英文
+
+              label.margin-left-10
+                = language_check(0, @interviewee.japanese)
+                '
+                | 日文
+
+              label.margin-left-10
+                | 其他：
+                u = @interviewee.other_language_unfamiliar
+
+          tr
+            td 精通
+            td
+              label.margin-left-10
+                = language_check(1, @interviewee.chinese)
+                '
+                | 國語
+
+              label.margin-left-10
+                = language_check(1, @interviewee.taiwanese)
+                '
+                | 台語
+
+              label.margin-left-10
+                = language_check(1, @interviewee.hakka)
+                '
+                | 客語
+
+              label.margin-left-10
+                = language_check(1, @interviewee.english)
+                '
+                | 英文
+
+              label.margin-left-10
+                = language_check(1, @interviewee.japanese)
+                '
+                | 日文
+
+              label.margin-left-10
+                | 其他：
+                u = @interviewee.other_language_familiar
+
+        h4 可詢問的前直屬主管
+        table.table.table-bordered
+          tr
+            th 姓名
+            th 服務單位
+            th 職稱
+            th 聯絡電話
+            th 方便聯絡時間
+          - @interviewee.supervisors.each do |supervisor|
+            tr
+              td = supervisor.name
+              td = supervisor.department
+              td = supervisor.title
+              td = supervisor.phone
+              td = supervisor.contact_time
+
+        table.table.table-bordered
+          tr
+            th 可到職日
+            th 希望待遇
+            th 應徵人簽名
+          tr
+            td = @interviewee.onboard_date
+            td = @interviewee.wish_salary
+            td

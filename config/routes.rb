@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   resources :interviewees, except: [:destroy], concerns: [:paginatable] do
     resources :activities, only: [:index, :create]
 
+    member do
+      get :print
+    end
+
     collection do
       get :result
       get :calendar
@@ -32,9 +36,9 @@ Rails.application.routes.draw do
   resource :user, only: [:edit, :update]
 
   scope 'pre-interview', controller: 'pre_interview', as: 'pre_interview' do
-    get 'consent/:token', action: :consent, as: 'consent'
-    get 'edit/:token', action: :edit, as: 'edit'
-    patch 'update/:token', action: 'update', as: 'update'
+    get 'consent/', action: :consent, as: 'consent'
+    get 'new/', action: :new, as: 'new'
+    post 'create/', action: 'create', as: 'create'
     get 'complete', action: 'complete', as: 'complete'
   end
 

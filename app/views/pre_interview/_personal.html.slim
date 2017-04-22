@@ -8,7 +8,7 @@
         | 姓名（中文）
 
       .col-sm-10
-        = f.text_field :name, class: 'form-control', disabled: disabled
+        = f.text_field :name, class: 'form-control'
 
     .form-group
       label.col-sm-2.control-label
@@ -25,7 +25,7 @@
         - Interviewee.genders.each do |i|
           .radio.radio-inline
             label
-              = f.radio_button :gender, i.first, checked: f.object.gender == i.first, disabled: disabled
+              = f.radio_button :gender, i.first, checked: f.object.gender == i.first
               = gender(i.second)
 
     .form-group
@@ -33,10 +33,7 @@
         | 應徵項目
 
       .col-sm-10
-        - if disabled
-          = f.text_field :position_name, value: f.object.position.name, class: 'form-control', disabled: disabled
-        - else
-          = f.collection_select :position_id, Position.all, :id, :name, {}, class: 'form-control'
+        = f.collection_select :position_id, Position.all, :id, :name, {}, class: 'form-control'
 
     .form-group
       label.col-sm-2.control-label

@@ -5,6 +5,8 @@ class IntervieweesController < AdminController
   before_action :set_interviewees, only: [:index, :result, :calendar]
   before_action :set_interviewee_status, only: [:index, :result]
 
+  layout false, only: [:print]
+
   def index
     params[:status] = params[:status].nil? ? 0 : params[:status]
     @interviewees = @interviewees.where(status: params[:status])
@@ -54,6 +56,10 @@ class IntervieweesController < AdminController
       }
     end
 
+  end
+
+  def print
+    set_resource
   end
 
   private
